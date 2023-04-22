@@ -1,0 +1,40 @@
+version: '3.6'
+
+services:
+  fastchat:
+    image: fastchat:latest
+    build:
+      context: ./fastchat/
+      dockerfile: Dockerfile.fastchat
+    ports:
+      - "21001:21001"
+      - "21002:21002"
+      - "8000:8000"
+    volumes:
+      - ./vicuna:/model/
+    command: ./start.sh
+    networks:
+      - my-network
+
+  redis:
+    image: redis:latest
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - "6379:6379"
+    networks:
+      - my-network
+
+  derfbot:
+    image: derfbot:latest
+    build:
+      context: ./derfbot
+      dockerfile: Dockerfile.derfbot
+    environment:
+      - DISCORD_TOKEN2
+    command: python derfbot.py
+    networks:
+      - my-network
+
+networks:
+  my-network:

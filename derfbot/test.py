@@ -1,18 +1,14 @@
 import requests
 
 # Define the URL and JSON payload
-url = 'http://localhost:8000/v1/chat/completions'
+url = "http://localhost:8000/v1/chat/completions"
 payload = {
     "model": "vicuna-7b-v1.1",
-    "messages": [
-        {"role": "user", "content": "Can you tell me a Kobold joke?"}
-    ]
+    "messages": [{"role": "user", "content": "Can you tell me a Kobold joke?"}],
 }
 
 # Set the headers
-headers = {
-    "Content-Type": "application/json"
-}
+headers = {"Content-Type": "application/json"}
 
 # Send the POST request with JSON payload and headers
 response = requests.post(url, json=payload, headers=headers)

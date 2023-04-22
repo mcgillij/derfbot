@@ -16,15 +16,6 @@ services:
     networks:
       - my-network
 
-  redis:
-    image: redis:latest
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-    ports:
-      - "6379:6379"
-    networks:
-      - my-network
-
   derfbot:
     image: derfbot:latest
     build:
